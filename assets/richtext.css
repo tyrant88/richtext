@@ -1,0 +1,13 @@
+.richtext .ql-container {
+    min-height: 10rem;
+    font: inherit;
+}
+
+.richtext .ql-editor {
+    min-height: 10rem;
+}
+
+.richtext .ql-toolbar .ql-internal .rex-icon {
+    font-size: 14px;
+    line-height: 1;
+}

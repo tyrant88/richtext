@@ -1,0 +1,29 @@
+{
+    "name": "lus/richtext",
+    "type": "redaxo-addon",
+    "description": "Richtext-Feld (Quill 2) für Module und Formulare in REDAXO 6",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Laut und Schoen",
+            "homepage": "https://lautundschoen.de"
+        }
+    ],
+    "require": {
+        "php": "^8.5",
+        "redaxo/core": "^6.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lus\\Richtext\\": "src/"
+        }
+    },
+    "extra": {
+        "redaxo": {
+            "addon-class": "Lus\\Richtext\\RichtextAddon"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
