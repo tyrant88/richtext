@@ -22,11 +22,6 @@
     min-height: 10rem;
 }
 
-.richtext .ql-toolbar .ql-internal .rex-icon {
-    font-size: 14px;
-    line-height: 1;
-}
-
 /* .rex-input setzt display: block und übersteuert sonst das hidden-Attribut. */
 .richtext .richtext-source[hidden] {
     display: none;
@@ -37,7 +32,16 @@
     font-family: var(--rex-font-mono);
 }
 
-.richtext .ql-toolbar .ql-html .rex-icon {
+/* Icon-Knöpfe in den Farben der Quill-Icons. .rex-icon bringt eine eigene Farbe mit; :focus-visible statt :focus,
+   weil der Knopf nach dem Klick den Fokus behält und sonst aktiv aussähe. */
+.richtext .ql-toolbar button .rex-icon {
+    color: #444;
     font-size: 14px;
     line-height: 1;
+}
+
+.richtext .ql-toolbar button:hover .rex-icon,
+.richtext .ql-toolbar button:focus-visible .rex-icon,
+.richtext .ql-toolbar button.ql-active .rex-icon {
+    color: #06c;
 }
