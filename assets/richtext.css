@@ -1,6 +1,21 @@
+/* Rahmen, Fläche und Fokus wie bei .rex-input */
+.richtext .ql-toolbar.ql-snow,
+.richtext .ql-container.ql-snow {
+    border-color: var(--rex-color-border-input);
+}
+
 .richtext .ql-container {
     min-height: 10rem;
+    background: var(--rex-color-surface-subtle);
+    box-shadow: var(--rex-shadow-inset);
+    color: var(--rex-color-text);
     font: inherit;
+    transition: border-color .15s ease-in-out;
+}
+
+.richtext .ql-container:focus-within {
+    border-color: var(--rex-color-focus);
+    background: var(--rex-color-surface);
 }
 
 .richtext .ql-editor {
@@ -8,6 +23,21 @@
 }
 
 .richtext .ql-toolbar .ql-internal .rex-icon {
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* .rex-input setzt display: block und übersteuert sonst das hidden-Attribut. */
+.richtext .richtext-source[hidden] {
+    display: none;
+}
+
+.richtext .richtext-source {
+    margin-top: 0.5rem;
+    font-family: var(--rex-font-mono);
+}
+
+.richtext .ql-toolbar .ql-html .rex-icon {
     font-size: 14px;
     line-height: 1;
 }

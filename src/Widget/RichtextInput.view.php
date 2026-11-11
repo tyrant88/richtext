@@ -17,6 +17,7 @@ return static function (RichtextInput $input): void { ?>
                 'internal' => I18n::rawMsg('richtext_internal_link'),
                 'heading' => I18n::rawMsg('richtext_heading'),
                 'paragraph' => I18n::rawMsg('richtext_paragraph'),
+                'html' => I18n::rawMsg('richtext_html'),
             ],
         ], JSON_THROW_ON_ERROR),
     ]) ?>>

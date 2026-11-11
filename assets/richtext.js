@@ -55,7 +55,7 @@
         const editor = document.createElement('div');
         editor.className = 'richtext-editor';
         editor.innerHTML = source.value;
-        wrapper.append(editor);
+        source.before(editor);
 
         const quill = new Quill(editor, {
             theme: 'snow',
@@ -84,9 +84,37 @@
             button.setAttribute('aria-label', button.title);
         }
 
-        // Die Textarea bleibt das Formularfeld, ist aber nicht mehr sichtbar; Pflichtfelder prüft der Server.
+        // Die Textarea bleibt das Formularfeld und zeigt auf Knopfdruck den HTML-Code unter dem Editor.
+        // Pflichtfelder prüft der Server.
         source.hidden = true;
         source.required = false;
+
+        // Nicht über die Quill-Toolbar-Konfiguration: Quill setzt den Aktiv-Zustand seiner Knöpfe nach jeder
+        // Auswahländerung anhand der Formate zurück.
+        const htmlButton = document.createElement('button');
+        htmlButton.type = 'button';
+        htmlButton.className = 'ql-html';
+        htmlButton.innerHTML = '<i class="rex-icon fa-code" aria-hidden="true"></i>';
+        htmlButton.title = options.i18n?.html ?? 'HTML code';
+        htmlButton.setAttribute('aria-label', htmlButton.title);
+        htmlButton.setAttribute('aria-pressed', 'false');
+        if (source.id) {
+            htmlButton.setAttribute('aria-controls', source.id);
+        }
+        htmlButton.addEventListener('click', () => {
+            source.hidden = !source.hidden;
+            htmlButton.classList.toggle('ql-active', !source.hidden);
+            htmlButton.setAttribute('aria-pressed', String(!source.hidden));
+        });
+        const htmlGroup = document.createElement('span');
+        htmlGroup.className = 'ql-formats';
+        htmlGroup.append(htmlButton);
+        quill.getModule('toolbar').container.append(htmlGroup);
+
+        // Änderungen im HTML-Code übernimmt der Editor, ohne sie zurückzuschreiben.
+        source.addEventListener('input', () => {
+            quill.setContents(quill.clipboard.convert({ html: source.value }), 'silent');
+        });
         const label = source.id ? document.querySelector(`label[for="${CSS.escape(source.id)}"]`) : null;
         if (label) {
             quill.root.setAttribute('aria-label', label.textContent.trim());
